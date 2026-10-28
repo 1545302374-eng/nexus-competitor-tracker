@@ -1,0 +1,4 @@
+﻿需求原文索引（ASCII 文件名，避免跨平台解压失败）
+01-competitor-dimension-requirements.txt  = 竞品维度分析需求.txt
+02-sif-ad-strategy-inference.txt          = SIF竞品广告投放策略推测方式.txt
+03-traffic-volatility-analysis.txt        = 竞品流量波动分析.txt

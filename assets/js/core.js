@@ -200,7 +200,7 @@
   }
 
   function axisGrid(cfg){
-    const W=920,H=cfg.height||240,P=cfg.pad||{l:46,r:16,t:18,b:28};
+    const W=920,H=cfg.height||240,P=cfg.pad||{l:75,r:28,t:20,b:36};
     const yMin=cfg.yMin===undefined?0:cfg.yMin;
     const yMax=cfg.yMax===undefined?niceMax(Math.max.apply(null,cfg.allValues.concat([1]))):cfg.yMax;
     const plotW=W-P.l-P.r, plotH=H-P.t-P.b;
@@ -222,7 +222,7 @@
     const {W,H,P,plotW,plotH,y,x}=ax;
     let defs='', body=ax.g;
     const step=cfg.xStep||Math.ceil(cfg.labels.length/12);
-    cfg.labels.forEach((l,i)=>{ if(i%step===0||i===cfg.labels.length-1) body+='<text x="'+R(x(i))+'" y="'+(H-8)+'" text-anchor="middle">'+fmt.esc(l)+'</text>'; });
+    cfg.labels.forEach((l,i)=>{ if(i%step===0||i===cfg.labels.length-1) body+='<text x="'+R(x(i))+'\" y="'+(H-12)+'\" text-anchor="middle">'+fmt.esc(l)+'</text>'; });
     (cfg.refLines||[]).forEach(r=>{
       const yy=y(r.y);
       body+='<line class="refline" x1="'+P.l+'" y1="'+R(yy)+'" x2="'+(W-P.r)+'" y2="'+R(yy)+'" '+(r.color?'stroke="'+r.color+'"':'')+' stroke-opacity=".7"/>';
@@ -261,7 +261,7 @@
     const n=cfg.labels.length, band=plotW/n, bw=Math.min(cfg.barWidth||30,band*(stacked?0.52:0.66));
     let body=ax.g;
     const step=cfg.xStep||Math.ceil(n/12);
-    cfg.labels.forEach((l,i)=>{ if(i%step===0||i===n-1) body+='<text x="'+R(P.l+band*(i+0.5))+'" y="'+(H-8)+'" text-anchor="middle">'+fmt.esc(l)+'</text>'; });
+    cfg.labels.forEach((l,i)=>{ if(i%step===0||i===n-1) body+='<text x="'+R(P.l+band*(i+0.5))+'\" y="'+(H-12)+'\" text-anchor=\"middle\">'+fmt.esc(l)+'</text>'; });
     cfg.labels.forEach((l,i)=>{
       const cx=P.l+band*(i+0.5);
       if(stacked){
@@ -291,11 +291,11 @@
   function comboBars(cfg){
     const allBars=[]; cfg.labels.forEach((_,i)=>{ let t=0; cfg.bars.forEach(s=>t+=(s.values[i]||0)); allBars.push(t); });
     const maxBar=cfg.yMax||niceMax(Math.max.apply(null,allBars.concat([1])));
-    const ax=axisGrid({labels:cfg.labels,height:cfg.height||260,yMax:maxBar,yFmt:cfg.yFmt||((v)=>fmt.compact(v)),allValues:allBars,pad:{l:48,r:44,t:18,b:30},yTicks:cfg.yTicks||4});
+    const ax=axisGrid({labels:cfg.labels,height:cfg.height||260,yMax:maxBar,yFmt:cfg.yFmt||((v)=>fmt.compact(v)),allValues:allBars,pad:{l:75,r:48,t:20,b:40},yTicks:cfg.yTicks||4});
     const {W,H,P,plotW,y,x}=ax;
     const n=cfg.labels.length, band=plotW/n, bw=Math.min(38,band*0.5);
     let body=ax.g;
-    cfg.labels.forEach((l,i)=>{ body+='<text x="'+R(P.l+band*(i+0.5))+'" y="'+(H-9)+'" text-anchor="middle">'+fmt.esc(l)+'</text>'; });
+    cfg.labels.forEach((l,i)=>{ body+='<text x="'+R(P.l+band*(i+0.5))+'\" y="'+(H-12)+'\" text-anchor=\"middle\">'+fmt.esc(l)+'</text>'; });
     cfg.labels.forEach((l,i)=>{
       const cx=P.l+band*(i+0.5); let acc=0;
       cfg.bars.forEach(s=>{
@@ -336,7 +336,7 @@
     cfg.axes.forEach((a,i)=>{
       const p=pt(i,max);
       body+='<line x1="'+cx+'" y1="'+cy+'" x2="'+R(p[0])+'" y2="'+R(p[1])+'" stroke="rgba(102,178,224,.11)"/>';
-      const lp=pt(i,max*1.16);
+      const lp=pt(i,max*1.02);
       const anchor=Math.abs(lp[0]-cx)<8?'middle':(lp[0]>cx?'start':'end');
       body+='<text x="'+R(lp[0])+'" y="'+R(lp[1]+3)+'" text-anchor="'+anchor+'" fill="#8fa8bd" font-size="9">'+fmt.esc(a.label)+'</text>';
     });
@@ -345,7 +345,7 @@
       body+='<polygon points="'+pts.map(p=>p.map(R).join(',')).join(' ')+'" fill="'+(s.fill||'rgba(56,225,255,.12)')+'" stroke="'+(s.color||'#38e1ff')+'" stroke-width="1.6" stroke-linejoin="round"/>';
       pts.forEach((p,i)=>{ body+='<circle cx="'+R(p[0])+'" cy="'+R(p[1])+'" r="2.3" fill="#07111d" stroke="'+(s.color||'#38e1ff')+'" stroke-width="1.4"><title>'+fmt.esc(cfg.axes[i].label+': '+s.values[i])+'</title></circle>'; });
     });
-    return '<div class="chart"><svg viewBox="0 0 '+size+' '+size+'" style="max-width:'+size+'px;margin:0 auto" role="img">'+body+'</svg>'
+    return '<div class="chart chart-radar"><svg viewBox="0 0 '+size+' '+size+'" style="max-width:'+size+'px;margin:0 auto" role="img">'+body+'</svg>'
       + (cfg.legend===false?'':'<div class="chart-legend" style="justify-content:center">'+cfg.series.map(s=>'<span class="legend-item"><i class="legend-dot" style="background:'+(s.color||'#38e1ff')+'"></i>'+fmt.esc(s.name)+'</span>').join('')+'</div>')
       + '</div>';
   }
@@ -363,7 +363,7 @@
     const center=cfg.center||{};
     const svg='<svg viewBox="0 0 '+size+' '+size+'" width="'+size+'" height="'+size+'" role="img">'+body
       +'<text x="'+c+'" y="'+(c-2)+'" text-anchor="middle" fill="#e6f3ff" font-family="Bahnschrift, sans-serif" font-size="22">'+fmt.esc(center.value===undefined?'':center.value)+'</text>'
-      +'<text x="'+c+'" y="'+(c+14)+'" text-anchor="middle" fill="#7890a8" font-size="8" letter-spacing="1">'+fmt.esc(center.label||'')+'</text></svg>';
+      +'<text x="'+c+'" y="'+(c+16)+'" text-anchor="middle" fill="#7890a8" font-size="11" letter-spacing="1">'+fmt.esc(center.label||'')+'</text></svg>';
     const legend='<div style="display:flex;flex-direction:column;gap:6px;font-size:9px;color:#b6c9dc;min-width:110px">'+cfg.segments.map(s=>'<div style="display:flex;align-items:center;gap:6px"><i style="width:6px;height:6px;border-radius:1px;background:'+s.color+';flex:none"></i><span style="flex:1">'+fmt.esc(s.name)+'</span><b style="font-family:Bahnschrift,sans-serif;color:#fff;font-weight:500">'+fmt.dec(s.value/total*100,1)+'%</b></div>').join('')+'</div>';
     return '<div style="display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap">'+svg+legend+'</div>';
   }
@@ -385,7 +385,7 @@
       +'<path d="M '+R(p1[0])+' '+R(p1[1])+' A '+r+' '+r+' 0 '+large+' 1 '+R(p2[0])+' '+R(p2[1])+'" fill="none" stroke="'+color+'" stroke-width="7" stroke-linecap="round" style="filter:drop-shadow(0 0 6px '+color+'66)"/>'
       +ticks
       +'<text x="'+cx+'" y="'+(cy-16)+'" text-anchor="middle" fill="#e6f3ff" font-family="Bahnschrift, sans-serif" font-size="34">'+score+'</text>'
-      +'<text x="'+cx+'" y="'+(cy+4)+'" text-anchor="middle" fill="#7890a8" font-size="8" letter-spacing="1.4">'+fmt.esc(cfg.label||'SCORE')+' / '+max+'</text>'
+      +'<text x="'+cx+'" y="'+(cy+8)+'" text-anchor="middle" fill="#7890a8" font-size="11" letter-spacing="1.2">'+fmt.esc(cfg.label||'SCORE')+' / '+max+'</text>'
       +'</svg></div>';
   }
 
@@ -400,7 +400,7 @@
   }
 
   function scatter(cfg){
-    const W=920,H=cfg.height||330,P={l:52,r:22,t:18,b:36};
+    const W=920,H=cfg.height||360,P={l:75,r:26,t:20,b:50};
     const xs=cfg.points.map(p=>p.x), ys=cfg.points.map(p=>p.y);
     const xMin=cfg.xMin!==undefined?cfg.xMin:Math.min.apply(null,xs)*.94;
     const xMax=cfg.xMax!==undefined?cfg.xMax:Math.max.apply(null,xs)*1.06;
@@ -417,7 +417,7 @@
     for(let i=0;i<=4;i++){
       const v=xMin+(xMax-xMin)*i/4, xx=x(v);
       body+='<line class="gridline" x1="'+R(xx)+'" y1="'+P.t+'" x2="'+R(xx)+'" y2="'+(H-P.b)+'"/>';
-      body+='<text x="'+R(xx)+'" y="'+(H-12)+'" text-anchor="middle">'+(cfg.xFmt?cfg.xFmt(v):fmt.compact(v))+'</text>';
+      body+='<text x="'+R(xx)+'\" y="'+(H-24)+'\" text-anchor=\"middle\">'+(cfg.xFmt?cfg.xFmt(v):fmt.compact(v))+'</text>';
     }
     if(cfg.quadrant){
       const q=cfg.quadrant;
@@ -431,14 +431,14 @@
       body+='<circle cx="'+R(x(p.x))+'" cy="'+R(y(p.y))+'" r="'+rr+'" fill="'+(p.color||'#38e1ff')+'" fill-opacity=".22" stroke="'+(p.color||'#38e1ff')+'" stroke-width="1.3"><title>'+fmt.esc(p.label+' · x:'+p.x+' y:'+p.y)+'</title></circle>';
       if(p.showLabel) body+='<text x="'+R(x(p.x)+rr+4)+'" y="'+R(y(p.y)+3)+'" fill="#b6c9dc" font-size="8">'+fmt.esc(p.short||p.label)+'</text>';
     });
-    body+='<text x="'+(W/2)+'" y="'+(H-1)+'" text-anchor="middle" fill="#7890a8" font-size="8">'+fmt.esc(cfg.xLabel||'')+'</text>';
-    body+='<text x="12" y="'+(H/2)+'" text-anchor="middle" fill="#7890a8" font-size="8" transform="rotate(-90 12 '+(H/2)+')">'+fmt.esc(cfg.yLabel||'')+'</text>';
+    body+='<text x="'+(W/2)+'\" y=\"'+(H-6)+'\" text-anchor=\"middle\" fill=\"#7890a8\" font-size=\"8\">'+fmt.esc(cfg.xLabel||'')+'</text>';
+    body+='<text x=\"22\" y=\"'+(H/2)+'\" text-anchor=\"middle\" fill=\"#7890a8\" font-size=\"8\" transform=\"rotate(-90 22 '+(H/2)+')\">'+fmt.esc(cfg.yLabel||'')+'</text>';
     return '<div class="chart"><svg viewBox="0 0 '+W+' '+H+'" role="img">'+body+'</svg>'
       +(cfg.legend?'<div class="chart-legend">'+cfg.legend.map(l=>'<span class="legend-item"><i class="legend-dot" style="background:'+l.color+'"></i>'+fmt.esc(l.name)+'</span>').join('')+'</div>':'')+'</div>';
   }
 
   function waterfall(cfg){
-    const W=920,H=cfg.height||270,P={l:50,r:18,t:26,b:38};
+    const W=920,H=cfg.height||300,P={l:75,r:20,t:30,b:50};
     const items=cfg.items;
     let cum=0; const blocks=items.map(it=>{
       if(it.type==='total'||it.type==='start'){
@@ -469,7 +469,7 @@
         const yEnd=y(b.end);
         body+='<line x1="'+R(cx+bw/2)+'" y1="'+R(yEnd)+'" x2="'+R(P.l+band*(i+1.5)-bw/2)+'" y2="'+R(yEnd)+'" stroke="rgba(102,178,224,.25)" stroke-dasharray="2 3"/>';
       }
-      body+='<text x="'+R(cx)+'" y="'+(H-14)+'" text-anchor="middle" fill="#7890a8" font-size="8">'+fmt.esc(b.label)+'</text>';
+      body+='<text x="'+R(cx)+'\" y=\"'+(H-18)+'\" text-anchor=\"middle\" fill=\"#7890a8\" font-size=\"8\">'+fmt.esc(b.label)+'</text>';
     });
     return '<div class="chart"><svg viewBox="0 0 '+W+' '+H+'" role="img">'+body+'</svg><div class="chart-note"><span>'+fmt.esc(cfg.xNote||'')+'</span><span>'+fmt.esc(cfg.yNote||'')+'</span></div></div>';
   }

@@ -838,3 +838,344 @@ h1 .en{font-family:var(--mono);font-size:11px;color:var(--muted-2);letter-spacin
   .kpi-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
   .kpi{min-width:0}
 }
+
+/* ============================================================
+   READABILITY PASS · 2026-10-28
+   全站最小可读字号 11.5px；正文 13–14px；表格 13px。
+   只作用于屏幕，打印样式保持原样。
+   ============================================================ */
+:root{
+  --fs-micro:11px;
+  --fs-caption:11.5px;
+  --fs-small:12px;
+  --fs-body:13.5px;
+  --fs-lead:14px;
+  --fs-title:15px;
+}
+
+@media screen{
+  body{font-size:var(--fs-lead);line-height:1.7}
+  .small{font-size:var(--fs-small)}
+  .tiny{font-size:var(--fs-caption)}
+
+  /* 侧栏 / 顶栏 */
+  .brand-txt strong{font-size:20px}
+  .brand-cn{font-size:11.5px;letter-spacing:1.4px}
+  .brand-txt small{font-size:9.5px;letter-spacing:.9px;line-height:1.35;white-space:normal}
+  .brand-ver{font-size:10px}
+  .nav-label{font-size:10.5px;letter-spacing:1.2px}
+  .nav-label span{font-size:9.5px}
+  .nav-code{font-size:11px;width:28px}
+  .nav-name{font-size:13.5px}
+  .sys-line{font-size:10.5px;letter-spacing:.7px}
+  .sys-meta{font-size:10px}
+  .crumb{font-size:13px}
+  .crumb-root{font-size:10.5px;letter-spacing:1px}
+  .top-context{font-size:10.5px}
+  .ctx-sync{font-size:10.5px}
+  .footer{font-size:10.5px;letter-spacing:.7px}
+  .footer-right{font-size:10.5px}
+
+  /* 按钮 / 标签 / 表单 */
+  .btn{font-size:12.5px;height:34px;padding:0 15px}
+  .btn-sm{font-size:11.5px;height:30px;padding:0 10px}
+  .chip{font-size:11px;padding:3px 8px;letter-spacing:.45px;line-height:1.6}
+  .badge{font-size:10.5px;padding:2px 7px;line-height:1.65}
+  .tag{font-size:11.5px;padding:4px 9px}
+  .input,.select,.textarea{font-size:13px;height:34px;padding:0 10px}
+  .textarea{height:auto;min-height:74px;padding:9px 10px;line-height:1.65}
+  .field-label{font-size:11.5px;letter-spacing:.5px}
+  .seg-btn{font-size:12px;height:31px;padding:0 11px}
+  .tab{font-size:12.5px;padding:10px 14px 11px}
+  .tab .cnt{font-size:10.5px}
+  .pill-switch button{font-size:11.5px;height:27px;padding:0 9px}
+  .range-val{font-size:15px;width:64px}
+  .toast{font-size:12.5px;max-width:420px}
+
+  /* 页头 / 面板 */
+  .eyebrow{font-size:11px;letter-spacing:1.4px}
+  h1{font-size:30px;line-height:1.2}
+  h1 .en{font-size:13px;letter-spacing:1.5px}
+  .page-sub{font-size:13.5px;line-height:1.65;max-width:920px}
+  .head-stat small{font-size:11px;letter-spacing:.7px}
+  .panel-title{font-size:15px}
+  .panel-title .idx{font-size:10.5px}
+  .panel-sub{font-size:12.5px;line-height:1.6}
+  .panel-foot{font-size:11.5px;line-height:1.6}
+  .sec-num{font-size:11px}
+  .sec-title{font-size:16px}
+  .sec-desc{font-size:12.5px}
+  .note{font-size:12px;line-height:1.65}
+  .callout{font-size:13px;line-height:1.7}
+  .callout::before{width:16px;height:16px;line-height:15px;font-size:10px;left:11px;top:12px}
+  .mini-note{font-size:12px;line-height:1.65;margin-top:8px}
+
+  /* KPI / 结论 */
+  .kpi-label{font-size:12px;letter-spacing:.3px}
+  .kpi-value{font-size:27px}
+  .kpi-value .unit{font-size:12px}
+  .kpi-foot{font-size:11.5px;min-height:21px;line-height:1.5}
+  .delta{font-size:11.5px}
+  .verdict-grade small{font-size:10.5px;letter-spacing:1px}
+  .verdict-main h2{font-size:20px;line-height:1.45}
+  .verdict-main .reason{font-size:13.5px;line-height:1.75}
+  .vs-row{font-size:12px;line-height:1.55}
+  .vs-row b{font-size:14px}
+  .reason-list{gap:7px}
+
+  /* Agent / 板块 */
+  .agent-ico{font-size:10px}
+  .agent-name{font-size:12.5px}
+  .agent-meta{font-size:10.5px}
+  .agent-state{font-size:10.5px}
+  .agent-foot{font-size:10.5px}
+  .mod-code{font-size:10px}
+  .mod-status{font-size:10px}
+  .mod-title{font-size:13.5px}
+  .mod-metric{font-size:19px}
+  .mod-metric small{font-size:10.5px}
+  .mod-desc{font-size:11.5px}
+
+  /* 表格 */
+  .tbl{font-size:13px;min-width:720px}
+  .tbl th{font-size:11px;padding:8px 10px;letter-spacing:.45px}
+  .tbl td{padding:9px 10px}
+  .tbl td.num,.tbl th.num{font-size:13px}
+  .tbl .sub{font-size:11.5px;line-height:1.45}
+  .tbl .asin{font-size:12px}
+  .tbl-foot{font-size:11.5px;padding:10px 13px}
+  .meter-cell span{font-size:11.5px;width:26px}
+  .stat-table{font-size:12px}
+  .stat-table td:last-child{font-size:13px}
+  .stat-line{font-size:12.5px}
+  .stat-line b{font-size:13px}
+  .score-row{font-size:12px}
+  .score-row .val{font-size:12.5px}
+  .ratio-legend,.legend-box{font-size:11.5px}
+  .mini-item{font-size:12.5px;line-height:1.55;padding:7px 0}
+  .mini-item b{font-size:12.5px}
+
+  /* 正文块 */
+  .insight{font-size:13px;line-height:1.7}
+  .insight-n{font-size:10.5px}
+  .bullet-list{font-size:13px;line-height:1.7}
+  .kv{font-size:13px}
+  .kv dt{font-size:11.5px}
+  .persona-name{font-size:13px}
+  .persona-sub{font-size:11px}
+  .persona-share{font-size:17px}
+  .persona-share small{font-size:10.5px}
+  .persona-body{font-size:12.5px;line-height:1.7}
+  .quote{font-size:13px;line-height:1.75}
+  .quote .who{font-size:10.5px}
+  .tl-title{font-size:12.5px}
+  .tl-week{font-size:10.5px}
+  .tl-body{font-size:12px;line-height:1.65}
+  .week-no{font-size:10.5px}
+  .week-no b{font-size:11.5px}
+  .week-metric small{font-size:10.5px}
+  .phase-code,.phase-time{font-size:10.5px}
+  .phase-title{font-size:13px}
+  .phase-list li{font-size:12px}
+  .phase-kpi{font-size:10.5px}
+  .empty-state{font-size:12.5px}
+  .empty-state b{font-size:13.5px}
+
+  /* 广告树 / 细节 */
+  .tree-caret{font-size:10.5px}
+  .tree-name{font-size:12.5px}
+  .tree-type{font-size:10px}
+  .tree-meta{font-size:10.5px}
+  .adgroup{font-size:12px}
+  .adgroup .ag-kw{font-size:10.5px}
+  .conf{font-size:10.5px}
+  .tree-legend{font-size:10.5px}
+  .tok{font-size:12px;padding:3px 6px}
+  .anatomy-legend{font-size:10.5px}
+  .bullet-no{width:19px;height:19px;font-size:10px}
+  .bullet-text{font-size:12.5px;line-height:1.7}
+  .aplus-thumb span{font-size:10.5px}
+  .aplus-info b{font-size:11.5px}
+  .aplus-info small{font-size:10px}
+  .img-slot b{font-size:10.5px}
+  .img-slot small{font-size:10px;line-height:1.35}
+  .vm-cell{font-size:10.5px;height:30px}
+  .source{font-size:10.5px}
+  .copy-row{font-size:12px}
+  .copy-row .mono{font-size:10.5px}
+  .kpi-inline span{font-size:10.5px}
+
+  /* 图表 */
+  .chart text{font-size:14px}
+  .chart .val-label{font-size:13px}
+  .chart .bar-label{font-size:12.5px}
+  .chart-legend{font-size:12px;gap:14px}
+  .chart-note{font-size:12px;line-height:1.55}
+  .chart-empty{font-size:12.5px}
+  .gauge-center span{font-size:10px}
+  .score-ring .ring-txt span{font-size:9.5px}
+
+  /* 热力图 */
+  .hm-corner,.hm-col,.hm-row-h{font-size:11px}
+  .hm-row-h{font-size:12px}
+  .hm-col small{font-size:10px}
+  .hm-cell{height:36px;font-size:12px}
+  .hm-cell small{font-size:10px}
+  .hm-legend{font-size:10.5px}
+
+  /* 新建项目抽屉 */
+  .drawer-hd h2{font-size:18px}
+  .drawer-section h3{font-size:12px}
+  .drawer-note{font-size:12.5px;line-height:1.7}
+  .config-label{font-size:12.5px}
+  .config-label span{font-size:10.5px}
+  .config-label em{font-size:11px}
+  .config-label .cfg-step{font-size:11px;width:25px;height:21px}
+  .config-banner{font-size:12.5px}
+  .config-banner .cfg-ico{font-size:14px}
+  .mode-btn b{font-size:13px}
+  .mode-btn small{font-size:11.5px}
+  .window-btn{font-size:12px;height:36px}
+  .date-range{font-size:11.5px}
+  .date-range .input{font-size:12.5px;height:36px}
+  .window-summary{font-size:12px;line-height:1.6;padding:9px 10px}
+  .input::placeholder,.textarea::placeholder{font-size:12.5px}
+  #configForm .input{height:38px;font-size:13px}
+  #configForm .textarea{min-height:96px;font-size:13px}
+  #configForm .mini-note{font-size:11.5px}
+  .asin-chip{font-size:11px}
+  .asin-empty{font-size:11.5px}
+  .asin-add .input{font-size:12.5px;height:36px}
+  .cm-txt b{font-size:12px}
+  .cm-txt small{font-size:10.5px}
+  .config-mod{min-height:50px}
+  .config-mod .chip{font-size:10.5px;padding:1px 4px}
+  .bench-opt{font-size:11.5px;padding:7px 8px}
+  .bench-opt b{font-size:11.5px}
+  .field-err{font-size:11.5px;line-height:1.55}
+  .config-summary{font-size:12px;line-height:1.6}
+  .config-action-note{font-size:11.5px;line-height:1.55}
+  .config-actions .btn{font-size:12.5px;height:40px}
+
+  /* JS 里临时写死的字号，统一抬到可读档 */
+  [style*="font-size:7px"],[style*="font-size:7.5px"],
+  [style*="font-size:8px"],[style*="font-size:8.5px"]{font-size:11.5px!important;line-height:1.55}
+  [style*="font-size:9px"],[style*="font-size:9.5px"]{font-size:12px!important;line-height:1.55}
+  [style*="font-size:10px"],[style*="font-size:10.5px"],[style*="font-size:11px"]{font-size:12.5px!important;line-height:1.6}
+  h2[style*="font-size:15px"],h2[style*="font-size:17px"]{font-size:20px!important;line-height:1.45!important}
+
+  /* 窄屏不再二次缩小；图表允许横向滚动，不把字压成 4–6px */
+  @media (max-width:1360px){
+    .top-context .ctx-name,.top-context .ctx-div{display:none}
+  }
+  @media (max-width:980px){
+    .chart{overflow-x:auto}
+    .chart:not(.chart-radar) svg{min-width:760px}
+    .chart-radar svg{min-width:0;max-width:100%}
+    .kpi-label{font-size:12px}
+  }
+  @media (max-width:640px){
+    .btn{font-size:12px;padding:0 10px}
+    h1{font-size:24px}
+    .page-sub{font-size:13px}
+    .chart:not(.chart-radar) svg{min-width:760px}
+    .chart-radar svg{min-width:0;max-width:100%}
+    .config-actions .btn{font-size:12px}
+  }
+}
+
+@media screen and (min-width:1500px){
+  .chart text{font-size:11px}
+  .chart .val-label{font-size:11px}
+  .chart .bar-label{font-size:10.5px}
+}
+
+/* 1219–1360 宽度下五张 KPI 卡会挤成竖排，改为三列 */
+@media screen and (min-width:981px) and (max-width:1400px){
+  .kpi-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+
+/* 二次收口：把仍低于 11px 的可见文字抬到 11–11.5px */
+@media screen{
+  .brand-txt small{font-size:10.5px;letter-spacing:.5px}
+  .brand-ver{font-size:10.5px}
+  .nav-label span{font-size:10.5px}
+  .sys-meta{font-size:10.5px}
+  .footer,.footer-right{font-size:11px}
+  .agent-ico{font-size:10.5px}
+  .agent-meta,.agent-state,.agent-foot{font-size:11px}
+  .mod-code,.mod-status{font-size:11px}
+  .panel-title .idx{font-size:11px}
+  .badge{font-size:11.5px}
+  .source{font-size:11.5px}
+  .insight-n{font-size:11.5px}
+  .tl-week{font-size:11.5px}
+  .week-no{font-size:11px}
+  .week-no b{font-size:12px}
+  .phase-code,.phase-time,.phase-kpi{font-size:11px}
+  .tree-type{font-size:11px}
+  .tree-meta,.tree-legend{font-size:11px}
+  .adgroup .ag-kw,.conf{font-size:11px}
+  .bullet-no{font-size:10.5px}
+  .aplus-thumb span{font-size:11px}
+  .aplus-info small{font-size:11px}
+  .img-slot small{font-size:11px}
+  .vm-cell{font-size:11px}
+  .hm-col small{font-size:11px}
+  .hm-cell small{font-size:11px}
+  .hm-legend{font-size:11.5px}
+  .score-ring .ring-txt span{font-size:10.5px}
+  .config-label span{font-size:11px}
+  .config-label em{font-size:11.5px}
+  .config-mod .chip{font-size:11.5px}
+  .cm-txt small{font-size:11.5px}
+}
+
+@media screen{
+  .chart-radar text{font-size:12.5px}
+
+/* 窄列里的 SVG 会按 viewBox 等比缩小，单靠 px 不够；按容器宽度补一档 */
+.chart{container-type:inline-size}
+@container (max-width:760px){
+  .chart:not(.chart-radar) text{font-size:18px}
+  .chart:not(.chart-radar) .val-label{font-size:17px}
+  .chart:not(.chart-radar) .bar-label{font-size:16.5px}
+}
+}
+
+@media screen{
+  .score-ring .ring-txt span{font-size:11px}
+  .verdict-grade small{font-size:11px}
+  .agent-ico{font-size:11px}
+  .anatomy-legend{font-size:11.5px}
+  .bullet-no{font-size:11px}
+  .kpi-inline span{font-size:11.5px}
+  .tree-caret{font-size:11px}
+}
+
+/* 热力图在窄屏横向滚动，不把整页撑宽 */
+@media screen{
+  .hm{max-width:100%;overflow-x:auto}
+}
+
+@media screen{
+  .chart{min-width:0;max-width:100%}
+  .chart-legend{max-width:100%}
+}
+
+@media screen and (max-width:640px){
+  .seg{max-width:100%;overflow-x:auto}
+}
+
+@media screen and (max-width:640px){
+  .panel-hd{flex-wrap:wrap;gap:8px}
+  .panel-tools{flex:1 1 100%;justify-content:flex-start}
+}
+
+@media screen{
+  .mod-metric small{font-size:11.5px}
+}
+
+@media screen{
+  .copy-row .mono{font-size:11.5px}
+}
